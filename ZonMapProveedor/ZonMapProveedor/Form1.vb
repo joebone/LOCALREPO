@@ -22,11 +22,11 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         SELServidor.ShowDialog()
         If SELServidor.DialogResult = Windows.Forms.DialogResult.OK Then
-            Server = SELServidor.Server
-            User = SELServidor.User
-            Password = SELServidor.Password
-            BD = SELServidor.BD
-            lblConn.Text = String.Join("¬", Server, User, Password, BD)
+            Server                  = SELServidor.Server
+            User                    = SELServidor.User
+            Password                = SELServidor.Password
+            BD                      = SELServidor.BD
+            lblConn.Text            = String.Join("¬", Server, User, Password, BD)
         End If
 
 
@@ -36,11 +36,11 @@ Public Class Form1
         Dim SrvFrm As New SELServidor()
         SrvFrm.ShowDialog()
         If SrvFrm.DialogResult = Windows.Forms.DialogResult.OK Then
-            CmnServer = SrvFrm.Server
-            CmnUser = SrvFrm.User
-            CmnPassword = SrvFrm.Password
-            CmnBD = SrvFrm.BD
-            lblDbCmn.Text = String.Join("¬", CmnServer, CmnUser, CmnPassword, CmnBD)
+            CmnServer          = SrvFrm.Server
+            CmnUser            = SrvFrm.User
+            CmnPassword        = SrvFrm.Password
+            CmnBD              = SrvFrm.BD
+            lblDbCmn.Text      = String.Join("¬", CmnServer, CmnUser, CmnPassword, CmnBD)
         End If
     End Sub
 
@@ -186,21 +186,21 @@ Public Class Form1
                     Dim Str = GG.ReadLine()
                     Select Case Str.Substring(0, 3)
                         Case "Loc"
-                            Dim Vals = Str.Split("#"c)(1).Split("¬"c)
-                            Server = Vals(0)
-                            BD = Vals(1)
-                            User = Vals(2)
-                            Password = Vals(3)
+                            Dim Vals     = Str.Split("#"c)(1).Split("¬"c)
+                            Server       = Vals(0)
+                            BD           = Vals(1)
+                            User         = Vals(2)
+                            Password     = Vals(3)
                             lblConn.Text = String.Join("¬", Server, User, Password, BD)
                         Case "Cmn"
-                            Dim Vals = Str.Split("#"c)(1).Split("¬"c)
-                            CmnServer = Vals(0)
-                            CmnBD = Vals(1)
-                            CmnUser = Vals(2)
-                            CmnPassword = Vals(3)
+                            Dim Vals      = Str.Split("#"c)(1).Split("¬"c)
+                            CmnServer     = Vals(0)
+                            CmnBD         = Vals(1)
+                            CmnUser       = Vals(2)
+                            CmnPassword   = Vals(3)
                             lblDbCmn.Text = String.Join("¬", CmnServer, CmnUser, CmnPassword, CmnBD)
                         Case "TIPOS"
-                            Dim Vals = Str.Split("#"c)(1).Split("¬"c)
+                            Dim Vals      = Str.Split("#"c)(1).Split("¬"c)
                             cmbTipoProv.Items.Clear()
                             For Each itm In Vals
                                 cmbTipoProv.Items.Add(itm)
@@ -336,17 +336,17 @@ Public Class Form1
 
     Private Sub treeZonJuniper_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles treeZonJuniper.AfterSelect
         '''' Dim Key = String.Join("|"c, {RDR("Id_Zon").ToString(), RDR("Zon_Mostrar" & tipo).ToString, RDR("zon_Zonas" & tipo).ToString})
-        Dim Vals = e.Node.Name.Split("|"c)
-        Dim IdZon = Vals(0)
-        Dim Mostrar = Vals(1)
-        Dim Externo = If(String.IsNullOrWhiteSpace(Vals(2)), txtCodExtern.Text, Vals(2))
-        Dim tipo = Vals(3)
+        Dim Vals     = e.Node.Name.Split("|"c)
+        Dim IdZon    = Vals(0)
+        Dim Mostrar  = Vals(1)
+        Dim Externo  = If(String.IsNullOrWhiteSpace(Vals(2)), txtCodExtern.Text, Vals(2))
+        Dim tipo     = Vals(3)
 
         Label3.Text = "Zon_Zonas" & tipo
         Label5.Text = "zon_mostrarZona" & tipo
 
         cmbCodExterno.Text = Externo
-        cmbIdZon.Text = IdZon
+        cmbIdZon.Text      = IdZon
         chkMostrar.Enabled = Not String.IsNullOrWhiteSpace(Mostrar)
         chkMostrar.Checked = Mostrar = "1"
 
@@ -357,8 +357,8 @@ Public Class Form1
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim cExt = cmbCodExterno.Text
-        Dim idZon = cmbIdZon.Text
+        Dim cExt   = cmbCodExterno.Text
+        Dim idZon  = cmbIdZon.Text
         Dim Column = Label3.Text
 
         Using con = New SqlClient.SqlConnection(BDString)
@@ -374,8 +374,8 @@ Public Class Form1
             End Using
             JnZonBusc_TextChanged(sender, e)
             cmbCodExterno.Text = ""
-            cmbIdZon.Text = ""
-            Label3.Text = ""
+            cmbIdZon.Text      = ""
+            Label3.Text        = ""
         End Using
     End Sub
 End Class
